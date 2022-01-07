@@ -1,8 +1,9 @@
-import React from "react";
+import { React, useState } from "react";
 import styled from "styled-components";
 import ArrowLeftOutlinedIcon from "@mui/icons-material/ArrowLeftOutlined";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
-import Doctora from "../images/doctora.png";
+import sliderItems from "../data";
+import Doctora from "../images/doctora.png"
 
 const Container = styled.div`
   widht: 100%;
@@ -34,7 +35,8 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transform: translateX(0vw);
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -78,43 +80,33 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
-
+  const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {
-
-  }
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
 
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowLeftOutlinedIcon />
       </Arrow>
-      <Wrapper>
-        <Slide bg="f5fafd">
-          <ImgContainer>
-            <Image src={Doctora} />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>LOREM IPSUM</Title>
-            <Desc>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro,
-              nulla exercitationem!
-            </Desc>
-            <Button>SHOW MORE</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="fcf1ed">
-          <ImgContainer>
-            <Image src={Doctora} />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>LOREM IPSUM</Title>
-            <Desc>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro,
-              nulla exercitationem!
-            </Desc>
-            <Button>SHOW MORE</Button>
-          </InfoContainer>
-        </Slide>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={Doctora} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW MORE</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowRightOutlinedIcon />
