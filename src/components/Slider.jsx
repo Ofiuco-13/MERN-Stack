@@ -2,8 +2,8 @@ import { React, useState } from "react";
 import styled from "styled-components";
 import ArrowLeftOutlinedIcon from "@mui/icons-material/ArrowLeftOutlined";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
-import sliderItems from "../data";
-import Doctora from "../images/doctora.png"
+import exportedObject from "../data";
+import Doctora from "../images/doctora.png";
 
 const Container = styled.div`
   widht: 100%;
@@ -95,7 +95,7 @@ const Slider = () => {
         <ArrowLeftOutlinedIcon />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
+        {exportedObject.sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <Image src={Doctora} />
