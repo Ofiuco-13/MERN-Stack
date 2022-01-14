@@ -1,8 +1,7 @@
-import ProductList from "./components/ProductList";
-import Home from "./pages/Home";
+import Product from "./pages/Product";
 
 const App = () => {
-  return <ProductList/>;
+  return <Product/>;
 };
 
 export default App;
